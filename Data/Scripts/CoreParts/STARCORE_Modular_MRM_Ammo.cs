@@ -57,8 +57,8 @@ namespace Scripts
             Sync = new SynchronizeDef
             {
                 Full = false, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
-                PointDefense = false, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
-                OnHitDeath = false, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
+                PointDefense = true, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
+                OnHitDeath = true, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
             },
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
@@ -1324,7 +1324,12 @@ namespace Scripts
             EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
-
+            Sync = new SynchronizeDef
+            {
+                Full = false, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
+                PointDefense = true, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
+                OnHitDeath = true, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
+            },
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
