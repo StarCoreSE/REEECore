@@ -11,10 +11,12 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.FragmentDef.TimedSpawnDe
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.Conditions;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.UpRelativeTo;
+using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.FwdRelativeTo;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.ReInitCondition;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.RelativeTo;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.ConditionOperators;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef.StageEvents;
+using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.GuidanceType;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.ShieldDef.ShieldType;
@@ -27,6 +29,7 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.EwarDef.EwarMode;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.EwarDef.EwarType;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.EwarDef.PushPullDef.Force;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.LineDef;
+using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.LineDef.FactionColor;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.LineDef.TracerBaseDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.LineDef.Texture;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.DecalDef;
@@ -278,10 +281,10 @@ namespace Scripts
                 TargetLossDegree = 0f,
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                AccelPerSec = 200f,
-                DesiredSpeed = 110f, // voxel phasing if you go above 5100
+                AccelPerSec = 800f,
+                DesiredSpeed = 210f, // voxel phasing if you go above 5100
                 MaxTrajectory = 45000f,
-                DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
+                DeaccelTime = 480, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
                 RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
@@ -294,7 +297,7 @@ namespace Scripts
                     Aggressiveness = 0.1f, // controls how responsive tracking is.
                     MaxLateralThrust = 0.05f, // controls how sharp the trajectile may turn. Cap is 1, and this is % of your Accel.
                     NavAcceleration = 0, // helps influence how the projectile steers. 
-                    TrackingDelay = 0, // Measured in Shape diameter units traveled.
+                    TrackingDelay = 60, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
@@ -325,12 +328,12 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "", //ShipWelderArc
-                        Offset = Vector(x: 0, y: 0, z: 0),
+                        Name = "ARROWTRAIL", //ShipWelderArc
+                        Offset = Vector(x: 0, y: 0, z: -0.21f),
                         DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 1f,
                         },
                     },
                     Hit = new ParticleDef
@@ -670,7 +673,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 8000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 110f,
-                DesiredSpeed = 370, // voxel phasing if you go above 5100
+                DesiredSpeed = 670, // voxel phasing if you go above 5100
                 MaxTrajectory = 45000f,
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
@@ -684,7 +687,7 @@ namespace Scripts
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 3f, // controls how responsive tracking is.
                     MaxLateralThrust = 1f, // controls how sharp the trajectile may turn. Cap is 1, and this is % of your Accel.
-                    NavAcceleration = 0, // helps influence how the projectile steers. 
+                    NavAcceleration = 0.01f, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
                     CheckFutureIntersection = true, // Utilize obstacle avoidance for drones/smarts
@@ -697,7 +700,7 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0.65f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 240, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    OffsetMinRange = 0, // The range from target at which offsets are no longer active
+                    OffsetMinRange = 50, // The range from target at which offsets are no longer active
                     FocusOnly = true, // only target the constructs Ai's focus target
                     FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
                     ScanRange = 5000, // 0 disables projectile screening, the max range that this projectile will be seen at by defending grids (adds this projectile to defenders lookup database). 
@@ -863,7 +866,7 @@ namespace Scripts
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape , // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
-                Diameter = 1 , // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+                Diameter = 3 , // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
             } ,
             ObjectsHit = new ObjectsHitDef
             {
@@ -1067,8 +1070,8 @@ namespace Scripts
                 TargetLossDegree = 0, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 8000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
-                AccelPerSec = 120f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 370, // voxel phasing if you go above 5100
+                AccelPerSec = 420f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                DesiredSpeed = 670, // voxel phasing if you go above 5100
                 MaxTrajectory = 45000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -1078,11 +1081,11 @@ namespace Scripts
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
                 Smarts = new SmartsDef
                 {
-                    SteeringLimit = 175, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
-                    Inaccuracy = 15f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 8f, // controls how responsive tracking is.
+                    SteeringLimit = 100, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
+                    Inaccuracy = 5f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Aggressiveness = 15f, // controls how responsive tracking is.
                     MaxLateralThrust = 1f, // controls how sharp the trajectile may turn
-                    NavAcceleration = 0.1, // helps influence how the projectile steers. 
+                    NavAcceleration = 1f, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     CheckFutureIntersection = true, // Utilize obstacle avoidance for drones/smarts
                     FutureIntersectionRange = 0, // Range in front of the projectile at which it will detect obstacle.  If set to zero it defaults to DesiredSpeed + Shape Diameter
@@ -1094,9 +1097,11 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0.65f, // The ratio to offset the random direction (0 to 1)
                     OffsetTime = 30, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    OffsetMinRange = 100, // The range from target at which offsets are no longer active
+                    OffsetMinRange = 10, // The range from target at which offsets are no longer active
                     ScanRange = 5000, // 0 disables projectile screening, the max range that this projectile will be seen at by defending grids (adds this projectile to defenders lookup database). 
                     FocusOnly = true, // only target the constructs Ai's focus target
+                    AltNavigation = false, // If true this will swap the default navigation algorithm from ProNav to ZeroEffort Miss.  Zero effort is more direct/precise but less cinematic 
+                    MinTurnSpeed = 5, // set this to a reasonable value to avoid projectiles from spinning in place or being too aggressive turing at slow speeds 
                 },
             } ,
             AmmoGraphics = new GraphicDef
@@ -1551,7 +1556,7 @@ namespace Scripts
             EnergyCost = 0.01f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
-            Health = 2, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 6, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself. 
 			       //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
@@ -1784,7 +1789,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 560, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 475f,
-                DesiredSpeed = 375, // voxel phasing if you go above 5100
+                DesiredSpeed = 675, // voxel phasing if you go above 5100
                 MaxTrajectory = 3500,
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0.75f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
