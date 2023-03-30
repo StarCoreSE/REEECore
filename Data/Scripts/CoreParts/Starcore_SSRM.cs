@@ -143,7 +143,7 @@ namespace Scripts {
                     SpinFree = false, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
-                    MaxReloads = 1, // Maximum number of reloads in the LIFETIME of a weapon
+                    MaxReloads = 3, // Maximum number of reloads in the LIFETIME of a weapon
                 },
                 Audio = new HardPointAudioDef
                 {

@@ -1,5 +1,0 @@
-C:\Users\Muzzled\AppData\Roaming\SpaceEngineers\Mods\Starcore REEECore\obj\Debug\netstandard2.0\CoreParts.csproj.AssemblyReference.cache
-C:\Users\Muzzled\AppData\Roaming\SpaceEngineers\Mods\Starcore REEECore\obj\Debug\netstandard2.0\CoreParts.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Muzzled\AppData\Roaming\SpaceEngineers\Mods\Starcore REEECore\obj\Debug\netstandard2.0\CoreParts.AssemblyInfoInputs.cache
-C:\Users\Muzzled\AppData\Roaming\SpaceEngineers\Mods\Starcore REEECore\obj\Debug\netstandard2.0\CoreParts.AssemblyInfo.cs
-C:\Users\Muzzled\AppData\Roaming\SpaceEngineers\Mods\Starcore REEECore\obj\Debug\netstandard2.0\CoreParts.csproj.CoreCompileInputs.cache
