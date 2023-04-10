@@ -546,24 +546,6 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>OneHandClapping</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>150</MaxDistance>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Missiles\silenceLol.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
-
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>CloseNuked</SubtypeId>
       </Id>
       <Category>SHOT</Category>
