@@ -1118,7 +1118,7 @@ namespace Scripts
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 20, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 600, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
 
@@ -1138,7 +1138,6 @@ namespace Scripts
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomise direction of spawned projectiles.
                 Reverse = true, // Spawn projectiles backward instead of forward.
-                
                 DropVelocity = false, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards).
             },
@@ -1232,10 +1231,10 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 4f, // Meters
-                    Damage = 1f,
-                    Depth = 1f,
-                    MaxAbsorb = 0f,
+                    Radius = 8f, // Meters
+                    Damage = 1500f,
+                    Depth = 2f,
+                    MaxAbsorb = 500f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
@@ -1246,7 +1245,7 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 2f, //lol
+                    ParticleScale = 1f, //lol
                     CustomParticle = "AMS_I_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "FireworkRESound", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
@@ -1320,11 +1319,11 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 1500, // voxel phasing if you go above 5100
-                MaxTrajectory = 4000f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 1000, // voxel phasing if you go above 5100
+                MaxTrajectory = 4500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
-                SpeedVariance = Random(start: -150, end: 150), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                SpeedVariance = Random(start: 1, end: 100), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
                 RangeVariance = Random(start: 50, end: 10), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
@@ -1397,42 +1396,42 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 5f, //
-                        Width = 0.2f, //
-                        Color = Color(red: 10f, green: 8f, blue: 7f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 4f, //
+                        Width = 0.15f, //
+                        Color = Color(red: 12, green: 12, blue: 8f, alpha: 2), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
+                            "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
                         {
-                            Enable = false, // If true Tracer TextureMode is ignored
+                            Enable = true, // If true Tracer TextureMode is ignored
                             Textures = new[] {
                                 "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                             },
-                            SegmentLength = 2f, // Uses the values below.
+                            SegmentLength = 1f, // Uses the values below.
                             SegmentGap = 2f, // Uses Tracer textures and values
                             Speed = 10f, // meters per second
-                            Color = Color(red: 8, green: 3, blue: 3, alpha: 1),
+                            Color = Color(red: 8, green: 3, blue: 3, alpha: 2),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = false,
                             WidthVariance = Random(start: 0f, end: 0f),
-                            ColorVariance = Random(start: 0f, end: 0f)
+                            ColorVariance = Random(start: 0f, end: 2f)
                         }
                     },
                     Trail = new TrailDef
                     {
                         Enable = true,
                         Textures = new[] {
-                            "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
+                            "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 3, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 10f, green: 8f, blue: 7f, alpha: 1),
-                        Back = false,
+                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 8, green: 3, blue: 3, alpha: 2),
+                        Back = true,
                         CustomWidth = 0f,
                         UseWidthVariance = false,
                         UseColorFade = false,

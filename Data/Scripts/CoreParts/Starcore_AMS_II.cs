@@ -5,6 +5,9 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.Prediction;
 using static Scripts.Structure.WeaponDefinition.TargetingDef.BlockTypes;
 using static Scripts.Structure.WeaponDefinition.TargetingDef.Threat;
+using static Scripts.Structure.WeaponDefinition.TargetingDef;
+using static Scripts.Structure.WeaponDefinition.TargetingDef.CommunicationDef.Comms;
+using static Scripts.Structure.WeaponDefinition.TargetingDef.CommunicationDef.SecurityMode;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.HardwareType;
 
@@ -41,7 +44,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -52,17 +55,17 @@ namespace Scripts {
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 4000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 400, // Minimum distance at which targets will be automatically shot at.
+                MinTargetDistance = 200, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 10, // Maximum number of targets to randomize between; 0 = unlimited.
                 TopBlocks = 6, // Maximum number of blocks to randomize between; 0 = unlimited.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
             {   
-                PartName = "AMS-II", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.64f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 4f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
-                AimLeadingPrediction = Basic, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
+                PartName = "Bainless", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 5f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = true, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
                 CanShootSubmerged = false, // Whether the weapon can be fired underwater when using WaterMod.
@@ -86,14 +89,14 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.003f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.003f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.025f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.032f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = -6,
-                    MaxElevation = 125,
+                    MinElevation = -5,
+                    MaxElevation = 90,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 5, // Default resting elevation
+                    HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.02f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
@@ -121,17 +124,17 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 120, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 4, // How many muzzles will fire a projectile per fire event.
+                    RateOfFire = 640, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 180, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 1, // Heat generated per shot.
-                    MaxHeat = 500, // Max heat before weapon enters cooldown (70% of max heat).
+                    HeatPerShot = 4, // Heat generated per shot.
+                    MaxHeat = 240, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .50f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 6, // Amount of heat lost per second.
+                    HeatSinkRate = 60, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -158,24 +161,29 @@ namespace Scripts {
                     Effect1 = new ParticleDef
                     {
                         Name = "RERotaryCannonFlash", // SubtypeId of muzzle particle effect.
-                        Color = Color(red: 15, green: 2, blue: 1, alpha: 0.8f), // Deprecated, set color in particle sbc.
-                        Offset = Vector(x: 0, y: 0, z: -1.8), // Offsets the effect from the muzzle empty.
+                        Color = Color(red: 15, green: 2, blue: 1, alpha: 0.8f),  // Deprecated, set color in particle sbc.
+                        Offset = Vector(x: 0, y: 0, z: -2), // Offsets the effect from the muzzle empty.
+
                         Extras = new ParticleOptionDef
                         {
-                            Loop = true, // Set this to the same as in the particle sbc!
-                            Restart = true, // Whether to end a looping effect instantly when firing stops.
+                            Loop = false, // Deprecated, set this in particle sbc.
+                            Restart = true, // Whether to end the previous effect early and spawn a new one.
+                            MaxDistance = 1000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            MaxDuration = 0, // How many ticks the effect should be ended after, if it's still running.
                             Scale = 1f, // Scale of effect.
                         },
                     },
                     Effect2 = new ParticleDef
                     {
                         Name = "RERotarycannonSmoke",
-                        Color = Color(red: 1, green: 1, blue: 1, alpha: 1f),
-                        Offset = Vector(x: 0, y: 0, z: 0),
+                        Color = Color(red: 0, green: 0, blue: 0, alpha: 1),
+                        Offset = Vector(x: 0, y: 0, z: -2),
+
                         Extras = new ParticleOptionDef
                         {
-                            Loop = true, // Set this to the same as in the particle sbc!
                             Restart = false,
+                            MaxDistance = 50,
+                            MaxDuration = 0,
                             Scale = 1f,
                         },
                     },
@@ -186,7 +194,7 @@ namespace Scripts {
                 Starcore_AMS_I_BallBulletBase_Frag,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
-            //Animations = Weapon75_Animation,
+            //Animations = Starcore_AMS_II_Animation,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.

@@ -27,7 +27,7 @@ namespace Scripts
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "None",
                         ElevationPartId = "None",
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.125f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     new MountPointDef {
@@ -36,7 +36,7 @@ namespace Scripts
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "None",
                         ElevationPartId = "None",
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.125f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     new MountPointDef {
@@ -45,7 +45,7 @@ namespace Scripts
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "None",
                         ElevationPartId = "None",
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.125f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     new MountPointDef {
@@ -54,7 +54,7 @@ namespace Scripts
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "None",
                         ElevationPartId = "None",
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.125f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                      
@@ -82,27 +82,34 @@ namespace Scripts
                     Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
-                    Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
+                    Power, Utility, Thrust, Offense, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
                 ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 0, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 7000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 500, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
-                TopBlocks = 32, // Maximum number of blocks to randomize between; 0 = unlimited.
+                //CycleTargets = 1, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
+                //CycleBlocks = 1, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
+                UniqueTargetPerWeapon = false, // only applies to multi-weapon blocks 
+                //MaxTrackingTime = 60, // After this time has been reached the weapon will stop tracking existing target and scan for a new one
+                ShootBlanks = false, // Do not generate projectiles when shooting
+                FocusOnly = false, // This weapon can only track focus targets.
+                EvictUniqueTargets = false, // if this is set it will evict any weapons set to UniqueTargetPerWeapon unless they to have this set
             },
             HardPoint = new HardPointDef
             {
                 PartName = "MRM", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 5f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 180f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                DeviateShotAngle = 0.15f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 180, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
-                AddToleranceToTracking = true, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
+                AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
                 CanShootSubmerged = false, // Whether the weapon can be fired underwater when using WaterMod.
 
                 Ui = new UiDef
@@ -124,14 +131,14 @@ namespace Scripts
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.1f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.1f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
-                    MinElevation = -180,
-                    MaxElevation = 180,
+                    RotateRate = 0f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = 0,
+                    MaxAzimuth = 0,
+                    MinElevation = 0,
+                    MaxElevation = 0,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 15, // Default resting elevation
+                    HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.25f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
@@ -159,28 +166,28 @@ namespace Scripts
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 500, // Set this to 3600 for beam weapons.
+                    RateOfFire = 3600, // Set this to 3600 for beam weapons.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 60, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 3600, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 100, // Heat generated per shot.
-                    MaxHeat = 3000, // Max heat before weapon enters cooldown (70% of max heat).
+                    HeatPerShot = 1, // Heat generated per shot.
+                    MaxHeat = 16000, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = 0f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 120, // Amount of heat lost per second.
+                    HeatSinkRate = 0, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
-                    ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
+                    ShotsInBurst = 10, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
+                    FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
                     SpinFree = false, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
-                    MaxReloads = 1, // Maximum number of reloads in the LIFETIME of a weapon
+                    MaxReloads = 2, // Maximum number of reloads in the LIFETIME of a weapon
                 },
                 Audio = new HardPointAudioDef
                 {
