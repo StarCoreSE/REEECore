@@ -71,7 +71,7 @@
       <DisplayName>Bainless AMS II</DisplayName>
 	  <Description>Anti-Missile System Two
 	 </Description>
-     <Icon>Textures\GUI\Icons\bainless.dds</Icon>
+     <Icon>Textures\Icons\bainless.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
