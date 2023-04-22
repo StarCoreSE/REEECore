@@ -38,7 +38,7 @@ namespace Scripts {
 
 					
                 },
-                Ejector = "", // Optional; empty from which to eject "shells" if specified.
+                Ejector = "SC_AMS_II_camera", // Optional; empty from which to eject "shells" if specified.
                 Scope = "SC_AMS_II_camera", // Where line of sight checks are performed from. Must be clear of block collision.
             },
             Targeting = new TargetingDef
@@ -62,7 +62,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {   
-                PartName = "Bainless", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Bainless II AMS", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 5f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -128,10 +128,10 @@ namespace Scripts {
                     BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 120, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
-                    DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 4, // Heat generated per shot.
+                    DelayUntilFire = 30, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    HeatPerShot = 1, // Heat generated per shot.
                     MaxHeat = 240, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .50f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 60, // Amount of heat lost per second.
@@ -148,9 +148,9 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "", // Audio for firing.
-                    FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
-                    ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
+                    FiringSound = "BainlessFire", // Audio for firing.
+                    FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
+                    ReloadSound = "BainlessReload", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
                     BarrelRotationSound = "",

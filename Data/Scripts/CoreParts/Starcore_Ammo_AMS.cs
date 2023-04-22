@@ -1118,7 +1118,7 @@ namespace Scripts
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 600, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 120, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
 
@@ -1379,12 +1379,12 @@ namespace Scripts
                     },
                     Eject = new ParticleDef
                     {
-                        Name = "",
+                        Name = "Shell_Casings",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 10,
                             HitPlayChance = 1f,
                         },
                     },
