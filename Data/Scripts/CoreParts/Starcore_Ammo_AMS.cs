@@ -534,7 +534,7 @@ namespace Scripts
                 Type = EnergySink, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Effect, // Effect , Field
                 Strength = 10000f,
-                Radius = 100f, // Meters
+                Radius = 15f, // Meters
                 Duration = 100, // In Ticks
                 StackDuration = true, // Combined Durations
                 Depletable = true,
@@ -601,7 +601,7 @@ namespace Scripts
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: -8, end: 8), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
@@ -1136,9 +1136,10 @@ namespace Scripts
             {
                 AmmoRound = "Ball_Turret_Frag", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
-                Degrees = 0, // Cone in which to randomise direction of spawned projectiles.
-                Reverse = true, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
+                Degrees = 180, // Cone in which to randomise direction of spawned projectiles.
+                Reverse = false, // Spawn projectiles backward instead of forward.
+                IgnoreArming = true,
+                DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards).
             },
             Pattern = new PatternDef
@@ -1159,7 +1160,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 20, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 75, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -1231,10 +1232,10 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 8f, // Meters
-                    Damage = 1500f,
+                    Radius = 2f, // Meters
+                    Damage = 500f,
                     Depth = 2f,
-                    MaxAbsorb = 500f,
+                    MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
@@ -1319,12 +1320,12 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 1000, // voxel phasing if you go above 5100
+                DesiredSpeed = 1600, // voxel phasing if you go above 5100
                 MaxTrajectory = 4500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
-                SpeedVariance = Random(start: 1, end: 100), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 50, end: 10), // subtracts value from MaxTrajectory
+                SpeedVariance = Random(start: 0, end: 20), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
@@ -1488,7 +1489,7 @@ namespace Scripts
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
-                Diameter = 1, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+                Diameter = 2, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
             },
             ObjectsHit = new ObjectsHitDef
             {
@@ -1501,7 +1502,7 @@ namespace Scripts
                 Fragments = 10, // Number of projectiles to spawn.
                 Degrees = 180, // Cone in which to randomise direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-
+                IgnoreArming = true,
                 DropVelocity = false, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards).
             },
@@ -1523,7 +1524,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 20, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 50, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -1595,9 +1596,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 4f, // Meters
+                    Radius = 18f, // Meters
                     Damage = 1f,
-                    Depth = 1f,
+                    Depth = 18f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -1683,12 +1684,12 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 8, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3000, // voxel phasing if you go above 5100
-                MaxTrajectory = 25f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 1, // voxel phasing if you go above 5100
+                MaxTrajectory = 15f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
-                SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                SpeedVariance = Random(start: -1000, end: 1000), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                RangeVariance = Random(start: -10, end: 10), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
@@ -1727,7 +1728,7 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 2,
                         },
                     },
                     Hit = new ParticleDef
@@ -1760,9 +1761,9 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 10f, //
-                        Width = 0.1f, //
-                        Color = Color(red: 200, green: 15, blue: 15, alpha: 10), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 1f, //
+                        Width = 2f, //
+                        Color = Color(red: 22, green: 1, blue: 1, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -1793,18 +1794,18 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
+                        DecayTime = 11, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 11, green: 1, blue: 1, alpha: 0.5f),
                         Back = false,
                         CustomWidth = 0,
                         UseWidthVariance = false,
-                        UseColorFade = true,
+                        UseColorFade = false,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
                         MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 0.2f,
-                        MaxLength = 3,
+                        MinLength = 0f,
+                        MaxLength = 0,
                     },
                 },
             },

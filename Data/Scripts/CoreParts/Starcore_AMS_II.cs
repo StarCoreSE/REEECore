@@ -49,25 +49,28 @@ namespace Scripts {
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 4000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 200, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 10, // Maximum number of targets to randomize between; 0 = unlimited.
-                TopBlocks = 6, // Maximum number of blocks to randomize between; 0 = unlimited.
-                StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
+                MaxTargetDistance = 4000, // 0 = unlimited, Maximum target distance that targets will be automatically shot at.
+                MinTargetDistance = 0, // 0 = unlimited, Min target distance that targets will be automatically shot at.
+                TopTargets = 24, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 4, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 24, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 4, // Number of blocks to "cycle" per acquire attempt.
+                StopTrackingSpeed = 0, // do not track target threats traveling faster than this speed
+                MaxTrackingTime = 30, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
             },
             HardPoint = new HardPointDef
             {   
                 PartName = "Bainless II AMS", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 5f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                DeviateShotAngle = 0.25f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
-                AddToleranceToTracking = true, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
+                AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
                 CanShootSubmerged = false, // Whether the weapon can be fired underwater when using WaterMod.
 
                 Ui = new UiDef
@@ -89,12 +92,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.025f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.032f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.05f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.063f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
                     MinElevation = -5,
-                    MaxElevation = 90,
+                    MaxElevation = 105,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.

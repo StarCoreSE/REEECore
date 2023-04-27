@@ -62,22 +62,22 @@ namespace Scripts {
                 MinimumDiameter = 0 , // 0 = unlimited, Minimum radius of threat to engage.
                 MaximumDiameter = 0 , // 0 = unlimited, Maximum radius of threat to engage.
                 MaxTargetDistance = 0 , // 0 = unlimited, Maximum target distance that targets will be automatically shot at.
-                MinTargetDistance = 50 , // 0 = unlimited, Min target distance that targets will be automatically shot at.
-                TopTargets = 14, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 2, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 8, // Number of blocks to "cycle" per acquire attempt.
+                MinTargetDistance = 0 , // 0 = unlimited, Min target distance that targets will be automatically shot at.
+                TopTargets = 24, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 4, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 24, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 4, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0 , // do not track target threats traveling faster than this speed
-                MaxTrackingTime = 35 , // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
+                MaxTrackingTime = 30 , // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
             } ,
             HardPoint = new HardPointDef
             {
                 PartName = "Painless", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.35f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 60f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
-                AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
-                DelayCeaseFire = 35, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
-                AddToleranceToTracking = true, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
+                DeviateShotAngle = 0.15f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 20f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
+                DelayCeaseFire = 5, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
+                AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
                 CanShootSubmerged = false, // Whether the weapon can be fired underwater when using WaterMod.
 
                 Ui = new UiDef
@@ -99,14 +99,14 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.03f,
-                    ElevateRate = 0.05f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.05f,
+                    ElevateRate = 0.06f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
                     MinElevation = -6,
-                    MaxElevation = 90,
+                    MaxElevation = 95,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 35, // Default resting elevation
+                    HomeElevation = 25, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.02f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
