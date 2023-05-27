@@ -53,7 +53,7 @@ namespace Scripts {
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 3500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 10, // Minimum distance at which targets will be automatically shot at.
+                MinTargetDistance = 200, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
                 //CycleTargets = 1, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 8, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -167,13 +167,13 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "", // SubtypeId of muzzle particle effect.
+                        Name = "SRMTRAIL", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
                         Extras = new ParticleOptionDef
                         {
                             Loop = false, // Deprecated, set this in particle sbc.
-                            Restart = false, // Whether to end the previous effect early and spawn a new one.
+                            Restart = true, // Whether to end the previous effect early and spawn a new one.
                             MaxDistance = 1000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
                             MaxDuration = 0, // How many ticks the effect should be ended after, if it's still running.
                             Scale = 1f, // Scale of effect.
