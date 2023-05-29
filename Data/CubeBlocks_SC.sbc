@@ -367,11 +367,11 @@
     Medium Ranged Fixed 
     [5km] range  
     Magazine Capacity: 1 
+    [75MW] Power Consumption, ~[130MW] during reload
+    [4s] Offense EWAR
     Rate of Fire: [11 rounds per minute]
     Reload Speed: [7 seconds]
-    Ammunition: [PPC Main Projectile Speed: 1200m/s, Damage Type: Energy]
-    [EMP effect on target.]
-    Damage starts falling off at 3km, down to 55% at 5km. 
+    Ammunition: [PPC Main Projectile Speed: 1500m/s, Damage Type: Energy]
 	 </Description>
      <Icon>Textures\Icons\ppc.dds</Icon>
       <CubeSize>Large</CubeSize>

@@ -579,14 +579,14 @@ namespace Scripts
              },
             Ewar = new EwarDef
             {
-                Enable = false, // Enables the EWAR , Electronic-Warfare System
+                Enable = true, // Enables the EWAR , Electronic-Warfare System
                 Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Effect, // Effect , Field
                 Strength = 100000,
-                Radius = 1, // Meters
+                Radius = 1f, // Meters
                 Duration = 240, // In Ticks
                 StackDuration = false, // Combined Durations
-                Depletable = true,
+                Depletable = false,
                 MaxStacks = 1, // Max Debuffs at once
                 NoHitParticle = false,
                 /*
@@ -614,12 +614,12 @@ namespace Scripts
                 },
                 Field = new FieldDef
                 {
-                    Interval = 1, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 100, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 1, // How many ticks it should take the field to grow to full size.  SET TO 1 MINIMUM!
+                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
+                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
+                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
                     HideModel = false, // Hide the projectile model if it has one.
                     ShowParticle = true, // Show Block damage effect.
-                    TriggerRange = 80f, //range at which fields are triggered
+                    TriggerRange = 250f, //range at which fields are triggered
                     Particle = new ParticleDef // Particle effect to generate at the field's position.
                     {
                         Name = "", // SubtypeId of field particle effect.
