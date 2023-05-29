@@ -61,7 +61,7 @@ namespace Scripts
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
-                Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
+                Offset = -20f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
                 IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
@@ -83,7 +83,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "ERPPC_EWAR", "ERPPCFXshots", "ERPPCFXshots2",
+                    "ERPPCFXshots", "ERPPCFXshots2",
                 },
                 Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
@@ -171,10 +171,10 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 6f, // Meters
-                    Damage = 24000f,
+                    Damage = 60000f,
                     Depth = 4f,
                     MaxAbsorb = 0f,
-                    Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -258,7 +258,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 1200, // voxel phasing if you go above 5100
+                DesiredSpeed = 2400, // voxel phasing if you go above 5100
                 MaxTrajectory = 7500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -570,49 +570,49 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
-           Ewar = new EwarDef
+            Ewar = new EwarDef
             {
-                Enable = true, // Enables the EWAR , Electronic-Warfare System
-                Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Effect, // Effect , Field
-                Strength = 100000,
-                Radius = 1, // Meters
-                Duration = 240, // In Ticks
+                Enable = false, // Enables EWAR effects AND DISABLES BASE DAMAGE AND AOE DAMAGE!!
+                Type = Emp, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
+                Mode = Field, // Effect , Field
+                Strength = 10f,
+                Radius = 250f, // Meters
+                Duration = 10, // In Ticks
                 StackDuration = false, // Combined Durations
                 Depletable = true,
-                MaxStacks = 1, // Max Debuffs at once
+                MaxStacks = 2, // Max Debuffs at once
                 NoHitParticle = false,
                 /*
                 EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
                 Emp : Targets & Shutdown any Block capable of being powered
                 Offense : Targets & Shutdowns Weaponry
-                Nav : Targets & Shutdown Gyros, Thrusters, or Locks them down
+                Nav : Targets & Shutdown Gyros or Locks them down
                 Dot : Deals Damage to Blocks in radius
                 AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
                 JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
                 Tractor : Affects target with Physics
                 Pull : Affects target with Physics
                 Push : Affects target with Physics
-                Anchor : Affects target with Physics
+                Anchor : Targets & Shutdowns Thrusters
                 
                 */
                 Force = new PushPullDef
                 {
-                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    ForceFrom = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    ForceTo = TargetCenter, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    Position = TargetCenter, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
                     DisableRelativeMass = false,
                     TractorRange = 0,
                     ShooterFeelsForce = false,
                 },
                 Field = new FieldDef
                 {
-                    Interval = 1, // Time between each pulse, in game ticks (60 == 1 second).
+                    Interval = 10, // Time between each pulse, in game ticks (60 == 1 second), starts at 0 (59 == tick 60).
                     PulseChance = 100, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 1, // How many ticks it should take the field to grow to full size.  SET TO 1 MINIMUM!
-                    HideModel = false, // Hide the projectile model if it has one.
+                    GrowTime = 60, // How many ticks it should take the field to grow to full size.
+                    HideModel = false, // Hide the default bubble, or other model if specified.
                     ShowParticle = true, // Show Block damage effect.
-                    TriggerRange = 80f, //range at which fields are triggered
+                    TriggerRange = 250f, //range at which fields are triggered
                     Particle = new ParticleDef // Particle effect to generate at the field's position.
                     {
                         Name = "", // SubtypeId of field particle effect.
@@ -640,7 +640,7 @@ namespace Scripts
                 AccelPerSec = 1600, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 2400, // voxel phasing if you go above 5100
                 MaxTrajectory = 7500f, // Max Distance the projectile or beam can Travel.
-                DeaccelTime = 1, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
+                DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
                 RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
@@ -1745,7 +1745,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 400, // voxel phasing if you go above 5100
+                DesiredSpeed = 2400, // voxel phasing if you go above 5100
                 MaxTrajectory = 500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.

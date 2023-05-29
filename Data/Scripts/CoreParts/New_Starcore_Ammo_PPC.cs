@@ -178,7 +178,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 6f, // Meters
-                    Damage = 150000f,
+                    Damage = 60000f,
                     Depth = 4f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
@@ -201,7 +201,7 @@ namespace Scripts
             {
                 Enable = false, // Enables the EWAR , Electronic-Warfare System
                 Type = Emp, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Effect, // Effect , Field
+                Mode = Field, // Effect , Field
                 Strength = 1f,
                 Radius = 15f, // Meters
                 Duration = 500, // In Ticks
@@ -234,9 +234,9 @@ namespace Scripts
                 },
                 Field = new FieldDef
                 {
-                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
+                    Interval = 60, // Time between each pulse, in game ticks (60 == 1 second).
+                    PulseChance = 100, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
+                    GrowTime = 1, // How many ticks it should take the field to grow to full size.
                     HideModel = false, // Hide the projectile model if it has one.
                     ShowParticle = true, // Show Block damage effect.
                     TriggerRange = 250f, //range at which fields are triggered
@@ -556,12 +556,12 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = true,
-                    Radius = 1f, // Meters
-                    Damage = 1f,
-                    Depth = 1f,
+                    Enable = false,
+                    Radius = 6f, // Meters
+                    Damage = 60000f,
+                    Depth = 4f,
                     MaxAbsorb = 0f,
-                    Falloff = NoFalloff, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -572,14 +572,14 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "particleName", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
-            },
+             },
             Ewar = new EwarDef
             {
-                Enable = true, // Enables the EWAR , Electronic-Warfare System
+                Enable = false, // Enables the EWAR , Electronic-Warfare System
                 Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Effect, // Effect , Field
                 Strength = 100000,
