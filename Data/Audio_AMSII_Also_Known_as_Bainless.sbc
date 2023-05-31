@@ -7,7 +7,7 @@
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>BainlessFire</SubtypeId>
       </Id>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <Category>SHOT</Category>
       <MaxDistance>3000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
@@ -40,7 +40,7 @@
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>BainlessReload</SubtypeId>
       </Id>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <Category>SHOT</Category>
       <MaxDistance>500</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
