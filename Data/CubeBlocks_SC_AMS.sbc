@@ -85,14 +85,14 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\Starcore\Starcore_AMSII_Base_Large.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="65" />
+        <Component Subtype="SteelPlate" Count="100" />
         <Component Subtype="Construction" Count="115" />
         <Component Subtype="MetalGrid" Count="45" />
         <Component Subtype="LargeTube" Count="35" />
         <Component Subtype="Motor" Count="250" />
         <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="90" />
-        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="265" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
