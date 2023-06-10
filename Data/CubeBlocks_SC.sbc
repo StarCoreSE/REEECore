@@ -373,6 +373,7 @@
     [Penetration fuse]
     HE 600mm:
     [Contact fuse, more damage]
+    [75mw passive draw]
   </Description>
      <Icon>Textures\Icons\ppc.dds</Icon>
       <CubeSize>Large</CubeSize>
