@@ -364,15 +364,16 @@
       </Id>
       <DisplayName>PPC - Particle Projector Cannon</DisplayName>
   <Description>
-    Medium Ranged Fixed 
-    [5km] range  
-    Magazine Capacity: 1 
-    [75MW] Power Consumption, ~[130MW] during reload
-    [4s] Offense EWAR
-    Rate of Fire: [11 rounds per minute]
-    Reload Speed: [7 seconds]
-    Ammunition: [PPC Main Projectile Speed: 1500m/s, Damage Type: Energy]
-	 </Description>
+    Long Ranged Fixed: [15km]
+    Magazine Capacity: [1]
+    Rate of Fire: [120]
+    Reload Speed: [15 seconds]
+    Ammunition: [1100m/s,] [Kinetic]
+    APHE 600mm:
+    [Penetration fuse]
+    HE 600mm:
+    [Contact fuse, more damage]
+  </Description>
      <Icon>Textures\Icons\ppc.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>true</GuiVisible>

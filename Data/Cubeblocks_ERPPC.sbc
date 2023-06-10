@@ -11,13 +11,14 @@
 			<DisplayName>ER PPC</DisplayName>
 
       <Description>
-        Medium Ranged Fixed
-        [7.5km] range
-        Magazine Capacity: 1
-        [100MW] Passive Draw, [200MW] during reload
-        [4s] Offense EWAR
-        Rate of Fire: ~10(?) RPM
-        Ammunition: [ERPPC Main Projectile Speed: 1200/s, Damage Type: Energy]
+        Magazine Capacity: [1]
+        Rate of Fire: [120]
+        Reload Speed: [15 seconds]
+        Ammunition: [1100m/s,] [Kinetic]
+        APHE 600mm:
+        [Penetration fuse]
+        HE 600mm:
+        [Contact fuse, more damage]
 
       </Description>
 			
