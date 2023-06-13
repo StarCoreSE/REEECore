@@ -93,11 +93,13 @@
 		  <DynamicMusicAmount>3</DynamicMusicAmount>
 		  <Volume>1</Volume>
        <PitchVariation>25</PitchVariation>
-       <SoundLimit>5</SoundLimit>
-		  <Loopable>false</Loopable>
+       <SoundLimit>50</SoundLimit>
+		  <Loopable>true</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\MW4 Laser Medium.wav</Start>
+          <Loop>Audio\MW4 Laser MediumLoop.wav</Loop>
+          <End>Audio\MW4 Laser MediumEND.wav</End>
 			  </Wave>
 		  </Waves>
 	  </Sound>   
@@ -113,12 +115,14 @@
 		  <DynamicMusicAmount>3</DynamicMusicAmount>
 		  <Volume>1</Volume>
        <PitchVariation>15</PitchVariation>
-       <SoundLimit>5</SoundLimit>
-		  <Loopable>false</Loopable>
+       <SoundLimit>50</SoundLimit>
+		  <Loopable>true</Loopable>
 		  <Waves>
-			  <Wave Type="D3">
-				  <Start>Audio\MW4 Laser Large.wav</Start>
-			  </Wave>
+        <Wave Type="D3">
+          <Start>Audio\MW4 Laser Large.wav</Start>
+          <Loop>Audio\MW4 Laser LargeLoop.wav</Loop>
+          <End>Audio\MW4 Laser LargeLoopEnd.wav</End>
+        </Wave>
 		  </Waves>
 	  </Sound>  
     
