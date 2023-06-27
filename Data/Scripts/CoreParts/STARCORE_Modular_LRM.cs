@@ -82,7 +82,7 @@ namespace Scripts
                     Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
-                    Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
+                    Power, Thrust, Offense, Utility, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
                 ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
@@ -98,7 +98,7 @@ namespace Scripts
             HardPoint = new HardPointDef
             {
                 PartName = "LRM-5", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 5.5f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 180f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released - while a target is available.
@@ -114,7 +114,7 @@ namespace Scripts
                 },
                 Ai = new AiDef
                 {
-                    TrackTargets = true, // Whether this weapon tracks its own targets, or (for multiweapons) relies on the weapon with PrimaryTracking enabled for target designation. Turrets Need this set to True.
+                    TrackTargets = false, // Whether this weapon tracks its own targets, or (for multiweapons) relies on the weapon with PrimaryTracking enabled for target designation. Turrets Need this set to True.
                     TurretAttached = false, // Whether this weapon is a turret and should have the UI and API options for such. Turrets Need this set to True.
                     TurretController = false, // Whether this weapon can physically control the turret's movement. Turrets Need this set to True.
                     PrimaryTracking = false, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
@@ -124,14 +124,14 @@ namespace Scripts
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = 0,
-                    MaxAzimuth = 0,
-                    MinElevation = 0,
-                    MaxElevation = 0,
+                    RotateRate = 0.1f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.1f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -180,
+                    MaxAzimuth = 180,
+                    MinElevation = -9,
+                    MaxElevation = 50,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 0, // Default resting elevation
+                    HomeElevation = 15, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.25f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.

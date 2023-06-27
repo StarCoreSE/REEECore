@@ -121,24 +121,24 @@ namespace Scripts
                 },
                 Ai = new AiDef
                 {
-                    TrackTargets = true, // Whether this weapon tracks its own targets, or (for multiweapons) relies on the weapon with PrimaryTracking enabled for target designation.
-                    TurretAttached = false, // Whether this weapon is a turret and should have the UI and API options for such.
-                    TurretController = false, // Whether this weapon can physically control the turret's movement.
-                    PrimaryTracking = true, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
+                    TrackTargets = false, // Whether this weapon tracks its own targets, or (for multiweapons) relies on the weapon with PrimaryTracking enabled for target designation. Turrets Need this set to True.
+                    TurretAttached = false, // Whether this weapon is a turret and should have the UI and API options for such. Turrets Need this set to True.
+                    TurretController = false, // Whether this weapon can physically control the turret's movement. Turrets Need this set to True.
+                    PrimaryTracking = false, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
                     LockOnFocus = false, // If enabled, weapon will only fire at targets that have been HUD selected AND locked onto by pressing Numpad 0.
                     SuppressFire = false, // If enabled, weapon can only be fired manually.
                     OverrideLeads = false, // Disable target leading on fixed weapons, or allow it for turrets.
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = 0,
-                    MaxAzimuth = 0,
-                    MinElevation = 0,
-                    MaxElevation = 0,
+                    RotateRate = 0.1f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.1f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -180,
+                    MaxAzimuth = 180,
+                    MinElevation = -9,
+                    MaxElevation = 50,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 0, // Default resting elevation
+                    HomeElevation = 15, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.25f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
@@ -166,21 +166,21 @@ namespace Scripts
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 3600, // Set this to 3600 for beam weapons.
+                    RateOfFire = 900, // Set this to 3600 for beam weapons.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 10, // Heat generated per shot.
-                    MaxHeat = 20, // Max heat before weapon enters cooldown (70% of max heat).
+                    HeatPerShot = 1, // Heat generated per shot.
+                    MaxHeat = 11, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = 0f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 0, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
-                    ShotsInBurst = 10, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
+                    ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
+                    FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
