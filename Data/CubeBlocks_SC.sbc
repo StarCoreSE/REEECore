@@ -435,8 +435,8 @@
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>true</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="1" y="1" z="4" />
-      <ModelOffset x="0" y="0" z="-1.25" />
+      <Size x="1" y="1" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
 	   <Model>Models\Starcore\muzzled_beam_odin.mwm</Model>
        <Components>
        <Component Subtype="SteelPlate" Count="165" />
@@ -452,6 +452,13 @@
       <BlockPairName>Starcore_M_Laser_Block</BlockPairName>
     <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
+  <MountPoints>
+    <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+    <MountPoint Side="Left" StartX="1" StartY="0" EndX="5" EndY="1" />
+    <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
+    <MountPoint Side="Right" StartX="0" StartY="0" EndX="4" EndY="1" />
+    <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="5" />
+  </MountPoints>
 	   <EdgeType>Light</EdgeType>
       <BuildTimeSeconds>65</BuildTimeSeconds>
       <DisassembleRatio>5</DisassembleRatio>
@@ -490,8 +497,8 @@
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>true</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="1" y="1" z="4" />
-      <ModelOffset x="0" y="0" z= "-1.25" />
+      <Size x="1" y="1" z="5" />
+      <ModelOffset x="0" y="0" z= "0" />
 	   <Model>Models\Starcore\muzzled_beam_odin.mwm</Model>
        <Components>
        <Component Subtype="SteelPlate" Count="165" />
@@ -507,6 +514,13 @@
       <BlockPairName>Starcore_L_Laser_Block</BlockPairName>
     <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
+  <MountPoints>
+    <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+    <MountPoint Side="Left" StartX="1" StartY="0" EndX="5" EndY="1" />
+    <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
+    <MountPoint Side="Right" StartX="0" StartY="0" EndX="4" EndY="1" />
+    <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="5" />
+  </MountPoints>  
 	   <EdgeType>Light</EdgeType>
       <BuildTimeSeconds>65</BuildTimeSeconds>
       <DisassembleRatio>5</DisassembleRatio>
