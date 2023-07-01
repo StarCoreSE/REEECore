@@ -104,6 +104,8 @@
       </MountPoints>
       <BlockPairName>Starcore_AMS_II_Block</BlockPairName>
       <EdgeType>Light</EdgeType>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
       <BuildTimeSeconds>65</BuildTimeSeconds>
       <DisassembleRatio>5</DisassembleRatio>
       <NavigationDefinition>Default</NavigationDefinition>
