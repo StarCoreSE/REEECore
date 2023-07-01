@@ -6,7 +6,7 @@
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>FireworkRESound</SubtypeId>
       </Id>
-      <Volume>1.5</Volume>
+      <Volume>0.3</Volume>
       <Category>IMP_SHIP</Category>
       <MaxDistance>3000</MaxDistance>
 
@@ -40,7 +40,7 @@
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>FireworkRESound_Dist</SubtypeId>
       </Id>
-      <Volume>1.5</Volume>
+      <Volume>0.3</Volume>
       <Category>IMP_SHIP</Category>
       <MaxDistance>3000</MaxDistance>
 

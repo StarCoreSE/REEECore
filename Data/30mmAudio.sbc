@@ -7,7 +7,7 @@
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>20mmRotaryLoopS</SubtypeId>
       </Id>
-      <Volume>2</Volume>
+      <Volume>0.5</Volume>
       <Category>SHOT</Category>
       <MaxDistance>3000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
@@ -33,7 +33,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>3000</MaxDistance>
-      <Volume>1.1</Volume>
+      <Volume>0.6</Volume>
       <Loopable>true</Loopable>	  
       
       <PitchVariation>25</PitchVariation>
